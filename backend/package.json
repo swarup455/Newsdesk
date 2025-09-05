@@ -1,0 +1,36 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Backend of my full stack news website",
+  "keywords": [
+    "js",
+    "react",
+    "full",
+    "stack",
+    "mern",
+    "stack",
+    "project",
+    "backend"
+  ],
+  "license": "ISC",
+  "author": "Swarup Das",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon -r dotenv/config src/index.js"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  },
+  "dependencies": {
+    "axios": "^1.11.0",
+    "cloudinary": "^2.7.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "firebase-admin": "^13.4.0",
+    "mongoose": "^8.17.1",
+    "multer": "^2.0.2",
+    "node-cron": "^4.2.1"
+  }
+}
