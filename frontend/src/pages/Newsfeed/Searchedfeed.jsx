@@ -27,7 +27,7 @@ const SearchResults = () => {
 
     if (loading) {
         return <div className="fixed inset-0 flex justify-center items-center ">
-            <ImSpinner8 className="text-violet-600 animate-spin" />
+            <ImSpinner8 size={35} className="text-violet-600 animate-spin" />
         </div>;
     }
     if (error) {
