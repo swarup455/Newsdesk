@@ -35,8 +35,8 @@ function LoginUser({ isOpen, onClose, switchToRegister }) {
     if (!isOpen) return null;
 
     return (
-        <div className="fixed px-10 inset-0 z-50 flex items-center justify-center bg-neutral-950/60">
-            <div className="w-full max-w-md bg-gray-100 dark:bg-neutral-800 rounded-lg shadow-xl p-10 relative">
+        <div className="fixed px-5 sm:px-10 inset-0 z-50 flex items-center justify-center bg-neutral-950/60">
+            <div className="w-full max-w-md bg-gray-100 dark:bg-neutral-800 rounded-lg shadow-xl p-5 sm:p-10 relative">
                 <h2 className="text-xl sm:mt-10 font-semibold text-center text-gray-800 dark:text-gray-300 mb-10">
                     Sign in to continue
                 </h2>

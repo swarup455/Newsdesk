@@ -18,13 +18,24 @@ import { useTypewriter } from "../../customHooks/useTypewriter";
 
 dayjs.extend(relativeTime);
 
+function normalizeUrl(url) {
+    if (!url) return null;
+    try {
+        // Add https:// if missing
+        const fixed = url.startsWith("http") ? url : `https://${url}`;
+        return new URL(fixed).href;
+    } catch {
+        return null; // invalid URL
+    }
+}
+
 const NewsArticle = () => {
     const { articleId } = useParams()
     const { articles, aiSummary, summaryLoading, summaryError, loading, error } = useSelector((state) => state.article)
     const getArticle = articles.find(article => article._id === articleId);
     const { like, toggleLike } = useLike(articleId)
     const { bookmark, toggleBookmark } = useBookmark(articleId)
-    
+
     const [summary, setSummary] = useState(false)
 
     const handleShare = async () => {
@@ -74,7 +85,14 @@ const NewsArticle = () => {
             </h1>
             <p className="text-lg my-10 dark:text-gray-400 text-gray-700">
                 {getArticle.summary}{" "}
-                <a href={getArticle.sourceLink} target="_blank" className="cursor-pointer text-blue-600 hover:underline dark:text-blue-400 font-semibold">Read More</a>
+                <a
+                    href={normalizeUrl(getArticle.sourceLink) || "#"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cursor-pointer text-blue-600 hover:underline dark:text-blue-400 font-semibold"
+                >
+                    Read More
+                </a>
             </p>
             <div className="w-full sm:w-3/4 space-y-5">
                 <button
