@@ -3,7 +3,7 @@ import axios from "axios";
 import { auth } from "../Auth/firebase";
 
 const api = axios.create({
-    baseURL: "http://localhost:8000/api/v1/bookmarks",
+    baseURL: "https://newsdesk-gzof.onrender.com/api/v1/bookmarks",
     withCredentials: true,
 });
 //automatically send user token in header in every request

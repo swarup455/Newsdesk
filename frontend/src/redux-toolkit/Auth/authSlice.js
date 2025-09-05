@@ -4,7 +4,7 @@ import { auth, provider } from "./firebase";
 import axios from "axios"
 
 const api = axios.create({
-    baseURL: "http://localhost:8000/api/v1/auth",
+    baseURL: "https://newsdesk-gzof.onrender.com/api/v1/auth",
     withCredentials: true,
     headers: {
         "Content-Type": "application/json",
