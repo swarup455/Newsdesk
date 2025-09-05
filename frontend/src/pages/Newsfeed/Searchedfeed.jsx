@@ -26,12 +26,14 @@ const SearchResults = () => {
     }, [query, dispatch]);
 
     if (loading) {
-        return <div className="inset-0"><ImSpinner8 className="animate-spin" /></div>;
+        return <div className="fixed inset-0 flex justify-center items-center ">
+            <ImSpinner8 className="text-violet-600 animate-spin" />
+        </div>;
     }
     if (error) {
         return <div className="text-red-500 sm:text-xl text-lg w-full text-center mt-10">{error}</div>;
     }
-    
+
     return (
         <div className='lg:px-30 md:px-20 sm:px-15 px-5'>
             <h2 className="my-5 text-xl sm:text-2xl font-semibold dark:text-neutral-100 text-neutral-700">Search Results</h2>
