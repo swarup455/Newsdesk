@@ -66,9 +66,9 @@ function Newscard({ articleId, logo, logotext, thumbnail, headline, description,
                         <button onClick={toggleLike}
                             className='cursor-pointer p-1 sm:p-3'>
                             {like ?
-                                <FcLike className=" text-[10px] sm:text-[18px] md:text-[20px] lg:text-[22px]" />
+                                <FcLike className=" text-[13px] sm:text-[18px] md:text-[20px] lg:text-[22px]" />
                                 :
-                                <FcLikePlaceholder className="text-[10px] sm:text-[18px] md:text-[20px] lg:text-[22px]" />
+                                <FcLikePlaceholder className="text-[13px] sm:text-[18px] md:text-[20px] lg:text-[22px]" />
                             }
                         </button>
                         <p className="text-[10px] sm:text-[13px] lg:text-[18px]">{likedCount}</p>
@@ -77,13 +77,13 @@ function Newscard({ articleId, logo, logotext, thumbnail, headline, description,
                         <button onClick={toggleBookmark}
                             className='cursor-pointer p-1 sm:p-3'>
                             {bookmark ?
-                                <IoBookmark className="text-[10px] sm:text-[18px] md:text-[20px] lg:text-[22px]" />
+                                <IoBookmark className="text-[13px] sm:text-[18px] md:text-[20px] lg:text-[22px]" />
                                 :
                                 <IoBookmarkOutline className="text-[10px] sm:text-[18px] md:text-[20px] lg:text-[22px]" />
                             }
                         </button>
                         <button onClick={handleShare} className='cursor-pointer p-1 sm:p-3'>
-                            <MdOutlineShare className="text-[10px] sm:text-[18px] md:text-[20px] lg:text-[22px]" />
+                            <MdOutlineShare className="text-[13px] sm:text-[18px] md:text-[20px] lg:text-[22px]" />
                         </button>
                     </div>
                 </div>

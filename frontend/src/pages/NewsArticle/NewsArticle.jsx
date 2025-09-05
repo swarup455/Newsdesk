@@ -112,20 +112,20 @@ const NewsArticle = () => {
                     <p className="border-x-2 px-3 border-x-gray-600 dark:text-gray-400 text-gray-400 my-4 text-sm">{dayjs(getArticle.published_at).fromNow()}</p>
                     <button onClick={toggleLike}>
                         {like ?
-                            <FcLike className=" cursor-pointer text-[10px] sm:text-[18px] md:text-[20px] lg:text-[22px]" />
+                            <FcLike className=" cursor-pointer text-[13px] sm:text-[18px] md:text-[20px] lg:text-[22px]" />
                             :
-                            <FcLikePlaceholder className=" cursor-pointer text-[10px] sm:text-[18px] md:text-[20px] lg:text-[22px]" />
+                            <FcLikePlaceholder className=" cursor-pointer text-[13px] sm:text-[18px] md:text-[20px] lg:text-[22px]" />
                         }
                     </button>
                     <button onClick={toggleBookmark}>
                         {bookmark ?
-                            <IoBookmark className=" dark:text-neutral-300 text-neutral-800 cursor-pointer text-[10px] sm:text-[18px] md:text-[20px] lg:text-[22px]" />
+                            <IoBookmark className=" dark:text-neutral-300 text-neutral-800 cursor-pointer text-[13px] sm:text-[18px] md:text-[20px] lg:text-[22px]" />
                             :
-                            <IoBookmarkOutline className=" dark:text-neutral-300 text-neutral-800 cursor-pointer text-[10px] sm:text-[18px] md:text-[20px] lg:text-[22px]" />
+                            <IoBookmarkOutline className=" dark:text-neutral-300 text-neutral-800 cursor-pointer text-[13px] sm:text-[18px] md:text-[20px] lg:text-[22px]" />
                         }
                     </button>
                     <button onClick={handleShare}>
-                        <MdOutlineShare className=" dark:text-neutral-300 text-neutral-800 cursor-pointer text-[10px] sm:text-[18px] md:text-[20px] lg:text-[22px]" />
+                        <MdOutlineShare className=" dark:text-neutral-300 text-neutral-800 cursor-pointer text-[13px] sm:text-[18px] md:text-[20px] lg:text-[22px]" />
                     </button>
                 </div>
                 {getArticle?.thumbnail &&
