@@ -6,6 +6,13 @@ cron.schedule("0 0 * * *", async () => {
   try {
     console.log("🧹 Running cleanup job...");
 
+    const totalArticles = await Article.countDocuments();
+
+    if (totalArticles <= 100) {
+      console.log("✅ Cleanup skipped: Less than or equal to 100 articles.");
+      return;
+    }
+    
     const threeDaysAgo = new Date();
     threeDaysAgo.setDate(threeDaysAgo.getDate() - 3);
 
