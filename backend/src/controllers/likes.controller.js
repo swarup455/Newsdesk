@@ -67,7 +67,7 @@ export const getLikedArticles = asyncHandler(async (req, res) => {
 
     const likedArticles = likes
         .map(like => like.articleId)
-        .filter(article => article !== null);
+        ?.filter(article => article !== null);
 
     return res.status(200).json(
         new ApiResponse(200, likedArticles, "Fetched liked articles")

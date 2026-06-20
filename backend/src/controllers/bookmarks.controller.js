@@ -60,7 +60,7 @@ export const getBookmarkedArticles = asyncHandler(async (req, res) => {
 
     const bookmarkedArticles = bookmarks
         .map(bookmark => bookmark.articleId)
-        .filter(article => article !== null);
+        ?.filter(article => article !== null);
 
     return res.status(200).json(
         new ApiResponse(200, bookmarkedArticles, "Fetched bookmarked articles")

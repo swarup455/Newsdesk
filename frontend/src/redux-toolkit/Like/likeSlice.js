@@ -79,7 +79,7 @@ const likeSlice = createSlice({
                 state.removeLikeError = null;
                 // remove articleId
                 const removedArticle = action.payload.data.article;
-                state.likedArticles = state.likedArticles.filter(
+                state.likedArticles = state.likedArticles?.filter(
                     (item) => item._id !== removedArticle._id
                 );
             })

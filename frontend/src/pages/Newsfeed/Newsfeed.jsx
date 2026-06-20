@@ -10,7 +10,7 @@ dayjs.extend(relativeTime);
 const Newsfeed = () => {
   const { categoryId } = useParams()
   const { articles, loading, error } = useSelector((state) => state.article);
-  const filteredArticles = articles.filter(article => 
+  const filteredArticles = articles?.filter(article => 
     String(article.category) === String(categoryId || "top"))
 
   if (loading) {

@@ -14,7 +14,7 @@ export const setCategories = asyncHandler(async (req, res) => {
     }
 
     const uniqueCategories = [
-        ...new Set(categoryList.filter((c) => c && c.trim())),
+        ...new Set(categoryList?.filter((c) => c && c.trim())),
     ];
 
     if (uniqueCategories.length === 0) {
@@ -58,7 +58,7 @@ export const fetchAndSaveArticles = async () => {
                 console.warn(`Category ${cat} not found in database`);
                 continue;
             }
-            const validArticles = data.results.filter(
+            const validArticles = data.results?.filter(
                 (news) => news.article_id && news.title && news.link
             );
             for (const news of validArticles) {

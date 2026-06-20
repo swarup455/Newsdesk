@@ -12,7 +12,7 @@ const ProfileEdit = ({ isOpen, onClose }) => {
   const { updated, status } = useSelector((state) => state.auth);
   const dispatch = useDispatch()
 
-  const intrests = categories.filter((item) => item.title !== "Top Headlines")
+  const intrests = categories?.filter((item) => item.title !== "Top Headlines")
 
   const [fullname, setFullname] = useState("");
   const [about, setAbout] = useState("");
@@ -22,7 +22,7 @@ const ProfileEdit = ({ isOpen, onClose }) => {
   const toggleIntrest = (value) => {
     setIntrest((prev) => {
       if (prev.includes(value)) {
-        return prev.filter((item) => item !== value);
+        return prev?.filter((item) => item !== value);
       } else {
         return [...prev, value];
       }

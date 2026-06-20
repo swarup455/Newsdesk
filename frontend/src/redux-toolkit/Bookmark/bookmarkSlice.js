@@ -79,7 +79,7 @@ const bookmarkSlice = createSlice({
                 state.removeBookmarkError = null;
                 // remove based on articleId passed into thunk
                 const removedArticle = action.payload.data.article;
-                state.bookmarkedArticles = state.bookmarkedArticles.filter(
+                state.bookmarkedArticles = state.bookmarkedArticles?.filter(
                     (item) => item._id !== removedArticle._id
                 );
             })
