@@ -32,6 +32,7 @@ function normalizeUrl(url) {
 
 const NewsArticle = () => {
     const { articleId } = useParams()
+    const navigate = useNavigate();
     const { articles, aiSummary, summaryLoading, summaryError, loading, error } = useSelector((state) => state.article)
     const getArticle = articles.find(article => article._id === articleId);
     const { like, toggleLike } = useLike(articleId)
@@ -79,7 +80,6 @@ const NewsArticle = () => {
     if (!getArticle) {
         return <div> Article not found</div>;
     }
-    const navigate = useNavigate();
 
     return (
         <div className="max-w-5xl mx-auto">
@@ -92,6 +92,7 @@ const NewsArticle = () => {
             </h1>
             <p className="text-lg my-10 dark:text-gray-400 text-gray-700">
                 {getArticle.summary}{" "}
+                <p>{getArticle.sourceLink}</p>
                 <a
                     href={normalizeUrl(getArticle.sourceLink) || "#"}
                     target="_blank"
