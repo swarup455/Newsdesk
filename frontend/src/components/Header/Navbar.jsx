@@ -3,7 +3,7 @@ import { CiLogin } from "react-icons/ci";
 import { GoSearch } from "react-icons/go";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
-import categories from './data';
+import categories from "../../data/mockCategories";
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useEffect, useRef } from 'react';
 import useScrollDirection from '../../customHooks/scrollDirection';
@@ -14,6 +14,7 @@ import { useState } from 'react';
 import ProfileMenu from "../../components/Popup/Profile/ProfileMenu";
 import { GiNightSleep } from "react-icons/gi";
 import { RxCross2 } from "react-icons/rx";
+import { Newspaper } from 'lucide-react';
 
 function Header() {
     const menuRef = useRef();
@@ -67,19 +68,20 @@ function Header() {
     }, [user]);
 
     return (
-        <div className='w-full bg-neutral-100 dark:bg-neutral-800 z-50 sticky top-0 lg:px-30 md:px-20 sm:px-15 px-5'>
+        <div className='w-full max-w-5xl mx-auto bg-white dark:bg-neutral-950 z-50 sticky top-0'>
             <div className={`overflow-hidden w-full flex justify-between items-center transition-all duration-150 ease-in-out
                 ${scroll === 'down' ? 'h-0' : 'h-18 sm:h-23'}`}>
-                <div className="text-2xl sm:text-3xl md:text-4xl py-3 text-gray-700 dark:text-red-500 m:3 sm:m-4 font-semibold 
-                font-newscycle cursor-pointer">
-                    NEWSDESK
+                <div className="flex items-center gap-2 py-3 m-3 sm:m-4 cursor-pointer">
+                    <Newspaper className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-red-500" strokeWidth={2} />
+                    <span className="text-xl sm:text-2xl md:text-3xl text-gray-700 dark:text-gray-100 font-bold font-newscycle tracking-tight">
+                        NEWSDESK
+                    </span>
                 </div>
-                <div className="hidden sm:flex w-1/3 px-2 bg-white dark:bg-neutral-700/30 rounded-lg m-4 justify-center items-center border 
-                border-neutral-200 dark:border-neutral-700">
-                    <button
-                        onClick={handleSearch}
-                    >
-                        <GoSearch className='cursor-pointer text-gray-700 dark:text-gray-200' />
+                <div className="hidden sm:flex w-1/3 px-3 bg-neutral-100 dark:bg-neutral-800/50 rounded-full m-4 justify-center items-center 
+                border border-transparent focus-within:border-neutral-300 dark:focus-within:border-neutral-600 
+                focus-within:bg-white dark:focus-within:bg-neutral-800 transition-colors">
+                    <button onClick={handleSearch} className="cursor-pointer shrink-0">
+                        <GoSearch className='text-neutral-400 dark:text-neutral-500' size={16} />
                     </button>
                     <input
                         type="text"
@@ -92,12 +94,12 @@ function Header() {
                                 handleSearch();
                             }
                         }}
-                        className="placeholder-gray-400 dark:text-white text-black w-full px-4 py-3 focus:outline-none"
+                        className="placeholder-gray-400 dark:text-white text-black w-full px-3 py-2.5 text-sm bg-transparent focus:outline-none"
                     />
                     <button
                         onClick={removeQuery}
-                        className={`mx-3 cursor-pointer ${!query.trim() && "hidden"}`}>
-                        <RxCross2 size={20} className="dark:text-neutral-300 text-neutral-700 " />
+                        className={`shrink-0 cursor-pointer text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors ${!query.trim() && "hidden"}`}>
+                        <RxCross2 size={16} />
                     </button>
                 </div>
                 <div ref={menuRef} className="ml-4 py-5 flex justify-between items-center gap-x-4 sm:gap-x-6 text-lg sm:text-xl
@@ -127,7 +129,7 @@ function Header() {
                     <LoginPopup isOpen={isLoginOpen} onClose={() => setIsLoginOpen(false)} />
                 </div>
             </div>
-            <div className="w-full flex items-center gap-2  rounded-lg p-2 bg-white dark:bg-neutral-700/30 border 
+            <div className="w-full flex items-center gap-2 rounded-2xl p-2 bg-white dark:bg-neutral-700/30 border 
             border-neutral-200 dark:border-neutral-700">
                 <IoIosArrowBack onClick={scrollLeft} className='text-gray-600 dark:text-gray-200 text-2xl cursor-pointer 
                 hover:text-black transition' />

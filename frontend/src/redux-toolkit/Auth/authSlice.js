@@ -1,15 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth, provider } from "./firebase";
-import axios from "axios"
-
-const api = axios.create({
-    baseURL: "https://newsdesk-gzof.onrender.com/api/v1/auth",
-    withCredentials: true,
-    headers: {
-        "Content-Type": "application/json",
-    },
-});
+import api from "../api/api";
 
 export const signInWithGoogle = createAsyncThunk("auth/signInWithGoogle",
     async (_, thunkAPI) => {
@@ -18,7 +10,7 @@ export const signInWithGoogle = createAsyncThunk("auth/signInWithGoogle",
             //getting token from firebase
             const token = await res.user.getIdToken();
             //sending data in backend
-            const { data } = await api.post("/google-login",
+            const { data } = await api.post("/auth/google-login",
                 {},
                 {
                     headers: {
@@ -43,7 +35,7 @@ export const signUpWithEmailAndPassword = createAsyncThunk(
             //getting the token from firebase
             const token = await res.user.getIdToken();
             //getting response data
-            const { data } = await api.post("/register-user",
+            const { data } = await api.post("/auth/register-user",
                 {},
                 {
                     headers: {
@@ -65,7 +57,7 @@ export const logInWithEmailAndPassword = createAsyncThunk("auth/logInWithEmailAn
             const res = await signInWithEmailAndPassword(auth, email, password)
             //getting user token
             const token = await res.user.getIdToken();
-            const { data } = await api.post("/login-user",
+            const { data } = await api.post("/auth/login-user",
                 {},
                 {
                     headers: {
@@ -88,7 +80,7 @@ export const fetchUserProfile = createAsyncThunk("auth/fetchUserProfile",
             //getting token from firebase
             const token = await user.getIdToken();
             //sending data into headers
-            const { data } = await api.get("/get-user", {
+            const { data } = await api.get("/auth/get-user", {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -110,7 +102,7 @@ export const logoutUser = createAsyncThunk(
             if (!user) throw new Error("No authenticated user");
             //getting token from firebase
             const token = await user.getIdToken();
-            await api.post("/logout-user",
+            await api.post("/auth/logout-user",
                 {},
                 {
                     headers: {
@@ -145,7 +137,7 @@ export const updateProfileData = createAsyncThunk(
                 formData.append("profileImage", userData.profileImage); // file object
             }
 
-            const { data } = await api.put("/update-profile",
+            const { data } = await api.put("/auth/update-profile",
                 formData,
                 {
                     headers: {

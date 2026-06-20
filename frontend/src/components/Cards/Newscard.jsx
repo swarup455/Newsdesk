@@ -8,6 +8,7 @@ import { BsDot } from "react-icons/bs";
 import { useLike } from "../../customHooks/useLike";
 import { useBookmark } from "../../customHooks/useBookmark";
 import { toast } from "react-toastify"
+import { Heart, Bookmark, Share2 } from 'lucide-react';
 
 function Newscard({ articleId, logo, logotext, thumbnail, headline, description, timestamp, path }) {
     const { like, likedCount, toggleLike } = useLike(articleId);
@@ -32,64 +33,65 @@ function Newscard({ articleId, logo, logotext, thumbnail, headline, description,
         }
     };
     return (
-        <article className='h-35 sm:h-55 md:h-65 lg:h-75 w-full p-1.5 md:p-2 sm:my-5 my-3 rounded-xl overflow-hidden 
-        flex justify-between items-center dark:bg-neutral-700/30 bg-white border border-neutral-200 dark:border-neutral-700'>
-            <Link to={path} className='h-full aspect-[4/3] rounded-lg overflow-hidden mr-2'>
+        <article className='w-full py-5 sm:py-6 flex gap-4 sm:gap-6 items-start border-b border-neutral-200 dark:border-neutral-800'>
+            <Link to={path} className='shrink-0 w-24 h-20 sm:w-40 sm:h-28 md:w-48 md:h-32 rounded-lg overflow-hidden'>
                 <img
                     className='dark:brightness-90 h-full w-full object-cover'
                     src={thumbnail || "/default-thumbnail.png"}
                     alt="image" />
             </Link>
-            <div className='h-full max-h-full flex flex-col flex-1 ml-2'>
-                <div className='h-1/6 sm:h-1/5 w-full flex items-center justify-start gap-1 sm:gap-1.5 md:gap-2 lg:gap-4 xl:pb-2 md:pt-2'>
+
+            <div className='flex-1 min-w-0 flex flex-col gap-2 sm:gap-3'>
+                <div className='flex items-center gap-1.5 text-gray-500 dark:text-gray-400'>
                     {logo ? (
-                        <img className="h-1/2 aspect-square" src={logo} alt="logo" />
+                        <img className="h-4 w-4 sm:h-5 sm:w-5 rounded-full object-cover" src={logo} alt="logo" />
                     ) : null}
-                    <p className='text-gray-500 dark:text-gray-400 flex items-end text-[8px] sm:text-[10px] md:text-[12px] lg:text-[14px]'>
+                    <p className='flex items-center text-xs sm:text-sm'>
                         {logotext}
                         <BsDot />
                         {timestamp}
                     </p>
                 </div>
-                <div className='overflow-hidden h-2/3 sm:h-3/5 w-full flex flex-col justify-baseline gap-2 items-start'>
+
+                <div className='flex flex-col gap-1'>
                     <Link to={path}>
-                        <h1 className='text-gray-900 dark:text-gray-300 leading-tight sm:text-[15px] lg:text-xl text-[11px] font-semibold'>{headline}</h1>
+                        <h1 className='text-gray-900 dark:text-gray-100 leading-snug text-sm sm:text-lg font-semibold line-clamp-2'>
+                            {headline}
+                        </h1>
                     </Link>
-                    <span className='hidden md:inline-block'>
-                        <Link to={path}>
-                            <p className='leading-tight xl:line-clamp-2 line-clamp-1 sm:text-sm text-[8px] text-gray-500 dark:text-gray-400'>{description}</p>
-                        </Link>
-                    </span>
+                    <Link to={path} className='hidden sm:block'>
+                        <p className='leading-snug text-sm text-gray-500 dark:text-gray-400 line-clamp-2'>
+                            {description}
+                        </p>
+                    </Link>
                 </div>
-                <div className='h-1/6 sm:h-1/5 w-full flex justify-between items-center pr-2'>
-                    <div className='h-full flex items-center dark:text-neutral-500 text-neutral-600'>
-                        <button onClick={toggleLike}
-                            className='cursor-pointer p-1 sm:p-3'>
-                            {like ?
-                                <FcLike className=" text-[13px] sm:text-[18px] md:text-[20px] lg:text-[22px]" />
-                                :
-                                <FcLikePlaceholder className="text-[13px] sm:text-[18px] md:text-[20px] lg:text-[22px]" />
-                            }
-                        </button>
-                        <p className="text-[10px] sm:text-[13px] lg:text-[18px]">{likedCount}</p>
-                    </div>
-                    <div className='h-full flex items-center dark:text-neutral-500 text-neutral-600'>
-                        <button onClick={toggleBookmark}
-                            className='cursor-pointer p-1 sm:p-3'>
-                            {bookmark ?
-                                <IoBookmark className="text-[13px] sm:text-[18px] md:text-[20px] lg:text-[22px]" />
-                                :
-                                <IoBookmarkOutline className="text-[10px] sm:text-[18px] md:text-[20px] lg:text-[22px]" />
-                            }
-                        </button>
-                        <button onClick={handleShare} className='cursor-pointer p-1 sm:p-3'>
-                            <MdOutlineShare className="text-[13px] sm:text-[18px] md:text-[20px] lg:text-[22px]" />
-                        </button>
-                    </div>
+
+                <div className='flex items-center gap-1 -ml-1.5 text-neutral-500 dark:text-neutral-400'>
+                    <button onClick={toggleLike} className='cursor-pointer flex items-center gap-1.5 p-1.5 sm:p-2 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors'>
+                        <Heart
+                            className="w-4 h-4 sm:w-[18px] sm:h-[18px]"
+                            fill={like ? "currentColor" : "none"}
+                            strokeWidth={1.75}
+                            color={like ? "#ef4444" : "currentColor"}
+                        />
+                        <span className="text-xs sm:text-sm">{likedCount}</span>
+                    </button>
+
+                    <button onClick={toggleBookmark} className='cursor-pointer p-1.5 sm:p-2 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors'>
+                        <Bookmark
+                            className="w-4 h-4 sm:w-[18px] sm:h-[18px]"
+                            fill={bookmark ? "currentColor" : "none"}
+                            strokeWidth={1.75}
+                        />
+                    </button>
+
+                    <button onClick={handleShare} className='cursor-pointer p-1.5 sm:p-2 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors'>
+                        <Share2 className="w-4 h-4 sm:w-[18px] sm:h-[18px]" strokeWidth={1.75} />
+                    </button>
                 </div>
             </div>
         </article>
-    )
+    );
 }
 
 export default Newscard

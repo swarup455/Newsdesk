@@ -1,4 +1,4 @@
-const categories = [
+const mockCategories = [
     {
         id: "top",
         title: "Top Headlines",
@@ -51,4 +51,4 @@ const categories = [
     }
 ];
 
-export default categories;
+export default mockCategories;

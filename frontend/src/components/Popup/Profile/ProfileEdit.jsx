@@ -1,5 +1,5 @@
 import { useState } from "react";
-import categories from "../../../components/Header/data.js";
+import categories from "../../../data/mockCategories.js";
 import { FaPlus } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
 import { updateProfileData } from "../../../redux-toolkit/Auth/authSlice.js";

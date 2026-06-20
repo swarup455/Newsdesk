@@ -1,16 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios"
-
-const api = axios.create({
-    baseURL: "https://newsdesk-gzof.onrender.com/api/v1/article",
-    withCredentials: true
-});
+import api from "../api/api";
 
 export const setCategories = createAsyncThunk(
     "articles/setCategories",
     async (categoryList, { rejectWithValue }) => {
         try {
-            const res = await api.post("/set-category", { categoryList });
+            const res = await api.post("/article/set-category", { categoryList });
             return res.data.categories;
         } catch (err) {
             return rejectWithValue(err.response?.data || err.message);
@@ -22,7 +17,7 @@ export const fetchArticles = createAsyncThunk(
     "articles/fetchArticles",
     async (_, { rejectWithValue }) => {
         try {
-            const res = await api.get("/get-article");
+            const res = await api.get("/article/get-article");
             return res.data;
         } catch (err) {
             return rejectWithValue(err.response?.data || err.message);
@@ -34,7 +29,7 @@ export const getAiSummary = createAsyncThunk(
     'articles/getAiSummary',
     async (articleId, { rejectWithValue }) => {
         try {
-            const response = await api.post('/get-ai-summary', { articleId });
+            const response = await api.post('/article/get-ai-summary', { articleId });
             return response.data.data;
         } catch (error) {
             return rejectWithValue(
@@ -48,7 +43,7 @@ export const searchArticles = createAsyncThunk(
     "articles/searchArticles",
     async (query, { rejectWithValue }) => {
         try {
-            const response = await api.post("/searched-articles", { query });
+            const response = await api.post("/article/searched-articles", { query });
             return response.data;
         } catch (error) {
             return rejectWithValue(

@@ -23,11 +23,12 @@ app.use(express.urlencoded({ extended: true, limit: "16kb" })) //configure to un
 app.use(express.static("public")) // configure to store temporary data in public folder 
 
 app.use('/api/v1/auth', authRouter)
-
 app.use('/api/v1/article', articleRouter)
-
 app.use('/api/v1/likes', likesRouter)
-
 app.use('/api/v1/bookmarks', bookmarksRouter)
+
+app.get("/api/v1/health", (req, res) => {
+    res.status(200).json({ status: "ok" })
+})
 
 export { app }

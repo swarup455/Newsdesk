@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime";
 import { FcLike } from "react-icons/fc";
@@ -15,6 +15,7 @@ import { getAiSummary } from "../../redux-toolkit/Article/articleSlice";
 import { toast } from "react-toastify"
 import { useState } from "react";
 import { useTypewriter } from "../../customHooks/useTypewriter";
+import { ArrowLeft } from "lucide-react"
 
 dayjs.extend(relativeTime);
 
@@ -78,9 +79,15 @@ const NewsArticle = () => {
     if (!getArticle) {
         return <div> Article not found</div>;
     }
+    const navigate = useNavigate();
+
     return (
-        <div className="lg:px-30 md:px-20 sm:px-15 px-5 ">
-            <h1 className="underline text-xl sm:text-2xl md:text-3xl lg:text-4xl my-10 font-semibold dark:text-gray-300 text-gray-800">
+        <div className="max-w-5xl mx-auto">
+            <button onClick={() => navigate(-1)} className="flex font-semibold text-neutral-600 hover:text-neutral-400 dark:hover:text-neutral-300 dark:text-neutral-200 items-center gap-2 mt-4">
+                <ArrowLeft size={22} />
+                Home
+            </button>
+            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl my-1 font-semibold dark:text-gray-300 text-gray-800">
                 {getArticle.title}
             </h1>
             <p className="text-lg my-10 dark:text-gray-400 text-gray-700">
@@ -148,7 +155,7 @@ const NewsArticle = () => {
                 </div>
                 {getArticle?.thumbnail &&
                     <img
-                        className="w-full rounded-lg dark:brightness-80 sm:w-3/4 aspect-video object-cover"
+                        className="w-full rounded-lg dark:brightness-80 aspect-video object-cover"
                         src={getArticle.thumbnail} alt="news thumbnail"
                     />
                 }

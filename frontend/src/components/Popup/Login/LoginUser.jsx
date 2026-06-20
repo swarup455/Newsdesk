@@ -4,11 +4,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { signInWithGoogle, logInWithEmailAndPassword } from '../../../redux-toolkit/Auth/authSlice';
 import { CgSpinner } from "react-icons/cg";
 import { clearError } from "../../../redux-toolkit/Auth/authSlice";
+import { Mail, Lock, Eye, EyeOff } from 'lucide-react';
 
 function LoginUser({ isOpen, onClose, switchToRegister }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const dispatch = useDispatch();
+    const [showPassword, setShowPassword] = useState(false);
     const { user, status, error } = useSelector((state) => state.auth);
 
     const handleSubmit = (e) => {
@@ -36,28 +38,47 @@ function LoginUser({ isOpen, onClose, switchToRegister }) {
 
     return (
         <div className="fixed px-5 sm:px-10 inset-0 z-50 flex items-center justify-center bg-neutral-950/60">
-            <div className="w-full max-w-md bg-gray-100 dark:bg-neutral-800 rounded-lg shadow-xl p-5 sm:p-10 relative">
-                <h2 className="text-xl sm:mt-10 font-semibold text-center text-gray-800 dark:text-gray-300 mb-10">
+            <div className="w-full max-w-md bg-white dark:bg-neutral-800 rounded-sm shadow-xl px-8 py-5 relative">
+                <h2 className="text-2xl sm:mt-10 font-semibold text-center text-gray-800 dark:text-white">
                     Sign in to continue
                 </h2>
+                <p className="text-xs text-center text-gray-500 dark:text-neutral-400 mt-2 mb-10">
+                    Welcome back! Please enter your details.
+                </p>
                 <form onSubmit={handleSubmit} className="space-y-4">
-                    <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="Email"
-                        className="text-sm w-full px-4 py-4 bg-gray-300 dark:bg-neutral-900 rounded-lg focus:outline-none"
-                    />
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        placeholder="Password"
-                        className="text-sm w-full px-4 py-4 bg-gray-300 dark:bg-neutral-900 rounded-lg focus:outline-none"
-                    />
+                    <div className="space-y-3">
+                        <div className="relative">
+                            <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 dark:text-neutral-500" />
+                            <input
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder="Email"
+                                className="text-sm w-full pl-10 pr-4 py-3 bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 rounded-xl focus:outline-none transition-all placeholder:text-gray-400 dark:placeholder:text-neutral-500"
+                            />
+                        </div>
+
+                        <div className="relative">
+                            <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 dark:text-neutral-500" />
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                placeholder="Password"
+                                className="text-sm w-full pl-10 pr-10 py-3 bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 rounded-xl focus:outline-none transition-all placeholder:text-gray-400 dark:placeholder:text-neutral-500"
+                            />
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 dark:text-neutral-500 hover:text-gray-600 dark:hover:text-neutral-300 transition-colors"
+                            >
+                                {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                            </button>
+                        </div>
+                    </div>
                     <button
                         type="submit"
-                        className="text-sm w-full bg-indigo-600 text-white py-4 rounded-lg font-semibold hover:bg-indigo-700
+                        className="text-sm w-full bg-indigo-600 text-white py-3 rounded-xl font-semibold hover:bg-indigo-700
                         flex items-center justify-center gap-2"
                     >
                         {status == "loading" &&
@@ -82,9 +103,9 @@ function LoginUser({ isOpen, onClose, switchToRegister }) {
 
                 <button
                     onClick={handleGoogleSignIn}
-                    className="w-full flex items-center justify-center gap-2 bg-red-500 text-sm text-white py-4 sm:mb-10 rounded-lg cursor-pointer"
+                    className="w-full flex items-center justify-center gap-2 border border-gray-200 text-sm text-gray-700 py-3 sm:mb-10 rounded-lg cursor-pointer"
                 >
-                    <FcGoogle />
+                    <FcGoogle size={22} />
                     Continue with Google
                 </button>
             </div>

@@ -1,26 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import { auth } from "../Auth/firebase";
-
-const api = axios.create({
-    baseURL: "https://newsdesk-gzof.onrender.com/api/v1/bookmarks",
-    withCredentials: true,
-});
-//automatically send user token in header in every request
-api.interceptors.request.use(async (config) => {
-    const user = auth.currentUser;
-    if (user) {
-        const token = await user.getIdToken();
-        config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-});
+import api from "../api/api";
 
 export const addBookmark = createAsyncThunk(
     "bookmarks/addBookmark",
     async ({ articleId }, { rejectWithValue }) => {
         try {
-            const res = await api.post("/set-bookmark", { articleId });
+            const res = await api.post("/bookmarks/set-bookmark", { articleId });
             return res.data; // contains { statusCode, data, message }
         } catch (error) {
             return rejectWithValue(error.response?.data || error.message);
@@ -32,7 +17,7 @@ export const removeBookmark = createAsyncThunk(
     "bookmarks/removeBookmark",
     async ({ articleId }, { rejectWithValue }) => {
         try {
-            const res = await api.post("/delete-bookmark", { articleId });
+            const res = await api.post("/bookmarks/delete-bookmark", { articleId });
             return res.data; // contains { statusCode, data:null, message }
         } catch (err) {
             return rejectWithValue(err.response?.data || err.message);
@@ -44,7 +29,7 @@ export const getBookmarkedArticles = createAsyncThunk(
     "bookmarks/getBookmarkedArticles",
     async (_, { rejectWithValue }) => {
         try {
-            const res = await api.get("/get-bookmarked-articles");
+            const res = await api.get("/bookmarks/get-bookmarked-articles");
             return res.data; // contains { statusCode, data:[articles], message }
         } catch (err) {
             return rejectWithValue(err.response?.data || err.message);

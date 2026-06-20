@@ -21,7 +21,7 @@ const Newsfeed = () => {
   {typeof error === "string" ? error : error?.message || "Failed to fetch articles..."}
 
   return (
-    <div className='lg:px-30 md:px-20 sm:px-15 px-5'>
+    <div className='max-w-5xl mx-auto'>
       {
         filteredArticles.map((article) => (
           <Newscard

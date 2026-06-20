@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom"
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { fetchUserProfile } from "./redux-toolkit/Auth/authSlice.js"
-import categories from "./components/Header/data.js"
+import mockCategories from "./data/mockCategories.js"
 import { setCategories } from "./redux-toolkit/Article/articleSlice.js"
 import { fetchArticles } from "./redux-toolkit/Article/articleSlice.js"
 import { useSelector } from "react-redux"
@@ -13,17 +13,14 @@ import { onAuthStateChanged } from "firebase/auth"
 import { auth } from "./redux-toolkit/Auth/firebase.js"
 
 function Layout() {
-
-  const { articles } = useSelector((state) => state.article)
-  const defaultCategories = categories.map((c) => c.id);
+  const { articles, categories } = useSelector((state) => state.article)
+  const defaultCategories = mockCategories.map((c) => c.id);
 
   const dispatch = useDispatch();
 
-  //to dispatch user profile
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        //Firebase restored session, now sync with backend
         dispatch(fetchUserProfile());
         dispatch(getLikedArticles());
         dispatch(getBookmarkedArticles())
@@ -47,10 +44,10 @@ function Layout() {
   }, [dispatch, articles.length]);
 
   return (
-    <>
+    <div className="px-5">
       <Navbar />
       <Outlet />
-    </>
+    </div>
   )
 }
 

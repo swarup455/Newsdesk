@@ -1,26 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import api from "../api/api";
 import { auth } from "../Auth/firebase";
-
-const api = axios.create({
-    baseURL: "https://newsdesk-gzof.onrender.com/api/v1/likes",
-    withCredentials: true
-});
-//automatically send user token in header in every request
-api.interceptors.request.use(async (config) => {
-    const user = auth.currentUser;
-    if (user) {
-        const token = await user.getIdToken();
-        config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-});
 
 export const addLike = createAsyncThunk(
     "likes/addLike",
     async ({ articleId }, { rejectWithValue }) => {
         try {
-            const res = await api.post("/set-like", { articleId });
+            const res = await api.post("/like/set-like", { articleId });
             return res.data;
         } catch (err) {
             return rejectWithValue(err.response?.data || err.message);
@@ -32,7 +18,7 @@ export const removeLike = createAsyncThunk(
     "likes/removeLike",
     async ({ articleId}, { rejectWithValue }) => {
         try {
-            const res = await api.post("/delete-like", { articleId });
+            const res = await api.post("/like/delete-like", { articleId });
             return res.data;
         } catch (err) {
             return rejectWithValue(err.response?.data || err.message);
@@ -43,7 +29,7 @@ export const removeLike = createAsyncThunk(
 export const getLikedArticles = createAsyncThunk("likes/getLikedArticles",
     async (_, { rejectWithValue }) => {
         try {
-            const res = await api.get("/get-liked-articles");
+            const res = await api.get("/like/get-liked-articles");
             return res.data;
         } catch (err) {
             return rejectWithValue(err.response?.data || err.message);
