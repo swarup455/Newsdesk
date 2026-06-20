@@ -94,7 +94,7 @@ const NewsArticle = () => {
                 {getArticle.summary}{" "}
                 {console.log(getArticle)}
                 <a
-                    href={normalizeUrl(getArticle.sourceLink) || "#"}
+                    href={normalizeUrl(getArticle.articleLink) || "#"}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="cursor-pointer text-blue-600 hover:underline dark:text-blue-400 font-semibold"
