@@ -11,7 +11,6 @@ const Newsfeed = () => {
   const { categoryId } = useParams()
   const { articles, loading, error } = useSelector((state) => state.article);
 
-  console.log(articles);
   const filteredArticles = Array.isArray(articles)
     ? articles.filter(article => String(article.category) === String(categoryId || "top")) : [];
 
