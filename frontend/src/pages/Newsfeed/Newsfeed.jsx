@@ -10,15 +10,17 @@ dayjs.extend(relativeTime);
 const Newsfeed = () => {
   const { categoryId } = useParams()
   const { articles, loading, error } = useSelector((state) => state.article);
-  const filteredArticles = articles.filter(article => 
-    String(article.category) === String(categoryId || "top"))
+
+  console.log(articles);
+  const filteredArticles = Array.isArray(articles)
+    ? articles.filter(article => String(article.category) === String(categoryId || "top")) : [];
 
   if (loading) {
     return <div className='fixed top-0 h-screen w-full flex justify-center items-center'>
       <ImSpinner8 size={35} className='text-violet-600 animate-spin' />;
     </div>
   }
-  {typeof error === "string" ? error : error?.message || "Failed to fetch articles..."}
+  { typeof error === "string" ? error : error?.message || "Failed to fetch articles..." }
 
   return (
     <div className='max-w-5xl mx-auto'>
