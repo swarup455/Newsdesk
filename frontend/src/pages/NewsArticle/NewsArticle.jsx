@@ -92,7 +92,6 @@ const NewsArticle = () => {
             </h1>
             <p className="text-lg my-10 dark:text-gray-400 text-gray-700">
                 {getArticle.summary}{" "}
-                {console.log(getArticle)}
                 <a
                     href={normalizeUrl(getArticle.articleLink) || "#"}
                     target="_blank"
